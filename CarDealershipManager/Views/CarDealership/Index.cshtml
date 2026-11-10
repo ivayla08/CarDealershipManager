@@ -1,0 +1,112 @@
+@model IEnumerable<CarDealershipManager.ViewModels.CarDealership.CarDealershipIndexViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Car dealerships</h1>
+
+<p>
+    <a asp-action="Create">Create New Car Dealership</a> |
+    <a asp-controller="Car" asp-action="Index">Show all cars</a> |
+    <a asp-controller="Owner" asp-action="Index">Show all owners</a>
+</p>
+
+<form asp-controller="CarDealership" asp-action="Index" method="get">
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label class="form-label">Car Dealership Name</label>
+
+            <input type="text"
+                   name="search"
+                   value="@ViewBag.Search"
+                   class="form-control"
+                   placeholder="Search by name..." />
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Minimum Cars</label>
+            <input type="number"
+                   name="minCars"
+                   value="@ViewBag.MinCars"
+                   min="0"
+                   class="form-control" />
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Sort By</label>
+            <select name="sortOrder" class="form-control">
+                <option value="name"
+                        selected="@(ViewBag.SortOrder == "name")">
+                    Name A-Z
+                </option>
+
+                <option value="cars_asc"
+                        selected="@(ViewBag.SortOrder == "cars_asc")">
+                    Cars Ascending
+                </option>
+
+                <option value="cars_desc"
+                        selected="@(ViewBag.SortOrder == "cars_desc")">
+                    Cars Descending
+                </option>
+            </select>
+        </div>
+
+        <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary">
+                Search
+            </button>
+        </div>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarsCount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarsCount)
+                </td>
+                <td>
+                    <a asp-controller="CarDealership" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="CarDealership" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-controller="CarDealership" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

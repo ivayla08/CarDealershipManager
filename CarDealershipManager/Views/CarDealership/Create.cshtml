@@ -1,0 +1,43 @@
+﻿@model CarDealershipManager.ViewModels.CarDealership.CarDealershipCreateViewModel
+
+<h1>Add car dealership</h1>
+
+<form asp-action="Create" method="post">
+
+    <label>Name:</label>
+    <input asp-for="Name" />
+    <span asp-validation-for="Name"></span>
+
+    <br />
+    <br />
+
+    <label>Address:</label>
+    <input asp-for="Address" />
+    <span asp-validation-for="Address"></span>
+
+    <br />
+    <br />
+
+    <label>Email:</label>
+    <input asp-for="Email" />
+    <span asp-validation-for="Email"></span>
+
+    <br />
+    <br />
+
+    <label>Phone number:</label>
+    <input asp-for="PhoneNumber" />
+    <span asp-validation-for="PhoneNumber"></span>
+
+    <br />
+    <br />
+
+   
+    <button type="submit">Save</button>
+
+</form>
+<a asp-action="Index">Back to list</a>
+
+<br />
+
+<a href="/Hospital/Index">Show all car dealerships</a>
